@@ -29,13 +29,13 @@
       <canvas width="400" height="400" id="game"></canvas>
     </div>
     <script>
-      var canvas = document.getElementById('game');
-      var context = canvas.getContext('2d');
+      let canvas = document.getElementById('game');
+      let context = canvas.getContext('2d');
 
-      var vierkantje = 16; // is dus 16 pixels groot
-      var aantal = 0; // dit houdt bij hoe vaak er geloopt is. (kun je de snelheid van de slang mee bepalen)
+      let vierkantje = 16; // is dus 16 pixels groot
+      let aantal = 0; // dit houdt bij hoe vaak er geloopt is. (kun je de snelheid van de slang mee bepalen)
 
-      var slang = {
+      let slang = {
         x: 160, // waar de slang is in horizontale richting
         y: 160, // waar de slang is in verticale richting
 
@@ -46,7 +46,7 @@
 
         maxCellen: 4, // dit is de lengte van de slang. groeit als de slang een appel eet
       };
-      var appel = {
+      let appel = {
         x: 320, // waar de appel is in horizontale richting
         y: 320, // waar de appel is in verticale richting
       };
@@ -87,7 +87,7 @@
           slang.y = 0;
         }
 
-        // er komt een cel bij de slang, namelijk het hoofd
+        // er komt een cel bij de slang aan de voorkant van de array, dus het hoofd van de slang
         slang.cellen.unshift({ x: slang.x, y: slang.y });
 
         // het puntje van de start moet weggehaald worden
@@ -101,7 +101,9 @@
 
         // teken de slang op het scherm, cel voor cel, beginnend bij het hoofd
         context.fillStyle = 'green';
-        slang.cellen.forEach(function (cell, index) {
+      
+        for (let j = 0; j < slang.cellen.length; j++) {
+          let cell = slang.cellen[j]
           context.fillRect(cell.x, cell.y, vierkantje - 1, vierkantje - 1);
 
           // check of de slang de appel heeft gegeten
@@ -115,7 +117,7 @@
           }
 
           // check of de slang in botsing komt met zichzelf
-          for (var i = index + 1; i < slang.cellen.length; i++) {
+          for (let i = j + 1; i < slang.cellen.length; i++) {
             if (cell.x === slang.cellen[i].x && cell.y === slang.cellen[i].y) {
               // botsing: je hebt verloren, dus opnieuw beginnen. Alle waarden worden weer teruggezet naar de beginstand.
               slang.x = 160;
@@ -130,7 +132,7 @@
               appel.y = krijgEenWillekeurigGetal(0, 25) * vierkantje;
             }
           }
-        });
+        };
       }
 
       // luister of de speler op een knop drukt

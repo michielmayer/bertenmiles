@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas width="400" height="400" id="game"></canvas>
+    <script>
+      let canvas = document.getElementById('game');
+      let context = canvas.getContext('2d');
+
+      let slang = {
+        x: 10,
+        y: 10,
+      };
+
+      let snelheidX = 2;
+      let snelheidY = 0;
+
+      let appel = {
+        x: 100,
+        y: 100,
+      };
+
+      function krijgEenWillekeurigGetal(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+
+      function loop() {
+        requestAnimationFrame(loop);
+        slang.x = slang.x + snelheidX;
+        slang.y = slang.y + snelheidY;
+
+        // komt de slang buiten het scherm:
+        // plaats dan de slang aan de andere kant op de rand van het scherm
+        // eerst verticaal
+        if (slang.x < 0) {
+          slang.x = canvas.width - 10;
+        } else if (slang.x >= canvas.width) {
+          slang.x = 0;
+        }
+
+        // en dan horizontaal
+        if (slang.y < 0) {
+          slang.y = canvas.height - 10;
+        } else if (slang.y >= canvas.height) {
+          slang.y = 0;
+        }
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        context.fillStyle = 'green';
+        context.fillRect(appel.x, appel.y, 30, 30);
+
+        context.fillStyle = 'red';
+        context.fillRect(slang.x, slang.y, 10, 10);
+
+        if (
+          slang.x + 10 > appel.x &&
+          slang.x < appel.x + 30 &&
+          slang.y + 10 > appel.y &&
+          slang.y < appel.y + 30
+        ) {
+          // context.fillText('Botsing', 10, 50);
+          appel.x = krijgEenWillekeurigGetal(0, 400);
+          appel.y = krijgEenWillekeurigGetal(0, 400);
+        }
+      }
+
+      document.addEventListener('keydown', function (e) {
+        // pijltjes toets naar links
+        if (e.which === 37) {
+          snelheidX = -2;
+          snelheidY = 0;
+        }
+        // pijltjes toets naar rechts
+        if (e.which === 39) {
+          snelheidX = 2;
+          snelheidY = 0;
+        }
+        // pijltjes toets naar boven
+        if (e.which === 38) {
+          snelheidX = 0;
+          snelheidY = -2;
+        }
+        // pijltjes toets naar onder
+        if (e.which === 40) {
+          snelheidX = 0;
+          snelheidY = 2;
+        }
+      });
+
+      // start
+      requestAnimationFrame(loop);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas width="400" height="400" id="game"></canvas>
+    <script>
+      let canvas = document.getElementById('game');
+      let context = canvas.getContext('2d');
+
+      let slangX = 10;
+      let slangY = 10;
+
+      let snelheidX = 1;
+      let snelheidY = 0;
+
+      function loop() {
+        requestAnimationFrame(loop);
+        slangX = slangX + snelheidX;
+        slangY = slangY + snelheidY;
+
+        // komt de slang buiten het scherm:
+        // plaats dan de slang aan de andere kant op de rand van het scherm
+        // eerst verticaal
+        if (slangX < 0) {
+          slangX = canvas.width - 10;
+        } else if (slangX >= canvas.width) {
+          slangX = 0;
+        }
+
+        // en dan horizontaal
+        if (slangY < 0) {
+          slangY = canvas.height - 10;
+        } else if (slangY >= canvas.height) {
+          slangY = 0;
+        }
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'red';
+        context.fillRect(slangX, slangY, 10, 10);
+        context.strokeRect(slangX, slangY, 10, 10);
+      }
+
+      // start
+      requestAnimationFrame(loop);
+    </script>
+  </body>
+</html>

@@ -12,20 +12,8 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/snake', (req, res) => {
-  res.render('snake');
-});
-
-app.get('/pong', (req, res) => {
-  res.render('pong');
-});
-
-app.get('/breakout', (req, res) => {
-  res.render('breakout');
-});
-
-app.get('/bubble', (req, res) => {
-  res.render('bubble');
+app.get('/:page', (req, res) => {
+  res.render(req.params.page);
 });
 
 server.listen(port, () => {

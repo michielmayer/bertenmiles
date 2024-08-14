@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas width="400" height="400" id="game"></canvas>
+    <script>
+      let canvas = document.getElementById('game');
+      let context = canvas.getContext('2d');
+
+      context.fillStyle = 'red';
+      context.fillRect(100, 170, 20, 60);
+    </script>
+  </body>
+</html>

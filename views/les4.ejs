@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <script>
+      // gewone variabelen
+      let aantal = 3;
+      let naam = 'Michiel';
+
+      console.log(aantal)
+      console.log(naam)
+
+      // arrays
+      let getallen = [5, 9, 4];
+      let fruit = ['appel', 'banaan', 'tomaat'];
+
+      console.log(fruit[0]); // print 'appel'
+      console.log(fruit[2]); // print 'tomaat'
+
+      for (let i = 0; i < fruit.length; i++) {
+        let woord = fruit[i];
+        console.log(woord);
+      }
+
+      fruit.pop(); // de laatste wordt weggehaald. Dus fruit is nu ['appel', 'banaan']
+      fruit.unshift('kiwi') // kiwi wordt aan de voorkant toegvoegd, fruit is nu ['kiwi', appel', 'banaan']
+
+      // objecten
+      let persoon = {
+        naam: 'Michiel',
+        haarkleur: 'bruin',
+        schoenmaat: 45,
+      };
+
+      console.log(persoon.naam);
+      console.log(persoon.schoenmaat);
+    </script>
+  </body>
+</html>

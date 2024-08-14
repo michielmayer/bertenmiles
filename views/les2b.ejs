@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <style>
+      canvas {
+        border: 1px solid white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas width="400" height="400" id="game"></canvas>
+    <script>
+      let canvas = document.getElementById('game');
+      let context = canvas.getContext('2d');
+
+      let slangX = 10;
+      let slangY = 10;
+
+      function loop() {
+        requestAnimationFrame(loop);
+        slangX = slangX + 1;
+        slangY = slangY + 1;
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = 'red';
+        context.fillRect(slangX, slangY, 10, 10);
+        context.strokeRect(slangX, slangY, 10, 10);
+      }
+
+      // start
+      requestAnimationFrame(loop);
+    </script>
+  </body>
+</html>
